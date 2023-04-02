@@ -1,0 +1,27 @@
+{"Movies": [  
+    {  
+      "id": 1,  
+      "title": "Top Gun: Maverick",  
+      "poster": "https://media-cache.cinematerial.com/p/500x/nza9lluu/top-gun-maverick-movie-poster.jpg?v=1648561333",  
+      "description": "After more than 30 years of service as one of the Navy's top aviators, Pete 'Maverick' Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him. Training a detachment of graduates for a special assignment, Maverick must confront the ghosts of his past and his deepest fears, culminating in a mission that demands the ultimate sacrifice from those who choose to fly it.",
+      "runtime": "2 hours",
+      "showtime": "12:00 PM" 
+    },  
+    {  
+      "id": 2,  
+      "title": "Fast and Furious",  
+      "poster": "https://media.meer.com/attachments/28f92512661079a21e25f7dcc98637d62680116f/store/fill/860/645/ec13319a8d80ce7dc7ead9e324f8e61413a195fc7980cbfba4972770f44d/Cast-of-Fast-and-Furious-6.jpg",  
+      "description": "Over many missions and against impossible odds, Dom Toretto and his family have outsmarted and outdriven every foe in their path. Now, they must confront the most lethal opponent they've ever faced. Fueled by revenge, a terrifying threat emerges from the shadows of the past to shatter Dom's world and destroy everything -- and everyone -- he loves.",
+      "runtime": "1 hour 30 Minutes",
+      "showtime": "14:00 PM"  
+    },  
+    {  
+      "id": 3,  
+      "title": "John Wick: Chapter 4",  
+      "poster": "https://media.meer.com/attachments/ae4974016c8f437fd92a072bcec102489df2deed/store/fill/1090/613/ad880d4d54c25a1e0cb62cf82421da0cf9d74b42be89774cb0a8d0982f33/No-hay-pistolas-suficientes-para-matar-a-Keanu-Reeves-en-John-Wick-2.jpg",  
+      "description": "With the price on his head ever increasing, legendary hit man John Wick takes his fight against the High Table global as he seeks out the most powerful players in the underworld, from New York to Paris to Japan to Berlin." ,
+      "runtime": "2 hours 30 Minutes",
+      "showtime": "15:30 PM"  
+    }  
+  ]  
+}
