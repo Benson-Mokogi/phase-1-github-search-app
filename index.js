@@ -1,124 +1,99 @@
-/*
-See the first movie's details, including its
- 1. poster, 
- 2. title, 
- 3. runtime,
- 4. showtime, 
- 5. available tickets** when the page loads. The number of
 
-   available tickets will need to be derived by subtracting the number of
-
-   `tickets_sold` from the theater's `capacity`.
-   
- */
-
-
-// function updateTickets(){
-
-// }
-
-
-function tickets(){
-    
-    const seats = 30
-    let ticket_sold = 0
-    let ticket_available = seats - ticket_sold
-    
-    const div = document.createElement("div")
-    div.id = "ticketsid"
-
-
-    
-    const ticket = `
-
-    <label for seats>Seats Available:</label>
-    <p id="seats">${seats}</p>
-
-    <label for availableTickets>Available Tickets:</label>
-    <p id="availableTickets">${ticket_available}</p>
-
-    <label for soldTickets>Sold Tickets:</label>
-    <p id="soldTickets">${ticket_sold}</p>
-
-    <label for buyticket>Buy Ticket</label>
-    <input id="buyticket" type="number"></input>
-
-    <input id="button" type="submit" value="Buy"></input>
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//Once the DOM loads, we render the first film automatically on the page.
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+document.addEventListener("DOMContentLoaded", ()=> {
+  
+  //fetching data again to render each film property.
+  fetch("http://localhost:3000/films/1")
+  .then(res => res.json())
+  .then(firstFilm => {
+    const card = `
+    <h3>${firstFilm.title}</h3>
+    <img src="${firstFilm.poster}"/>
+    <p><h4>Description</h3>${firstFilm.description}</p>
+    <p>Showtime: ${firstFilm.showtime}</p>
+    <p>Runtime: ${firstFilm.runtime}</p>
     `;
-    div.innerHTML = ticket
-    document.getElementById("tickets").appendChild(div)
+    //append the card variable to the innerHTML of #renderMovies
+    const movieElement = document.getElementById("renderMovies");
+    movieElement.innerHTML = card;
 
-}
-
-
-
-function renderMovies(movieData){
-    
-    const li = document.createElement("li");
-    const movieli = document.createElement("p")
-    
-    
-    const moviesCard = `
-    <div id="moviesRenders">
-    <p><h4>Title:</h4> ${movieData.id}. ${movieData.title}</p>
-    <img id="image" src=${movieData.poster}/>
-    <h3>Description</h3>
-    <p>${movieData.description}</p>
-    <p>Runtime: ${movieData.runtime}</p>
-    <p>Showtime: ${movieData.showtime}</p>
-    </div>    
+    //Render the ticket section here when the page DOM loads
+    const filmTicket = `
+    <p id="capacity">${firstFilm.capacity}</p>
+    <p id="tickets_sold">${firstFilm.tickets_sold}</p>
+    <label for buyTickets>Buy Tickets</label>
+    <input id="buyTickets" type="number"></input>
+    <input id="buyTickets" type="submit" value="Buy"></input>
     `;
-    li.innerHTML= moviesCard;
-    document.getElementById("movieslist").appendChild(li)
+    document.getElementById("tickets").innerHTML = filmTicket
 
-    movieli.textContent = `${movieData.id}. ${movieData.title}`
-    document.getElementById("repos-list").appendChild(movieli)
-    
-}
-
-
-function fetchMovies(){
-    //console.log("I'll be creating a movies app")
-     fetch("http://localhost:3000/Movies")
-    .then(res => res.json())
-    .then(data => data.forEach(movieData => renderMovies(movieData)))
-    .catch(error => {
-         console.log(error)
-         return error;
-     })
-
-     tickets()
-     document.querySelector("#button").addEventListener("submit", event => {
-        event.preventDefault()
-       // console.log("hello")
-       const seatsAvailable = parseInt(document.querySelector("#seats").textContent);
-       let availableTicket = parseInt(document.querySelector("#availableTickets").textContent);
-       let soldTicket = parseInt(document.querySelector("#soldTickets").textContent);
-       let toBuy = parseInt(document.querySelector("#buyticket").value);
-
-       console.log(availableTicket)
-       console.log(toBuy)
-
-       if(toBuy > availableTicket){
-        console.log(`We're sorry, only ${availableTicket} tickets are available`)
-        return;
-       } else {
-        console.log(`You've bought ${toBuy} tickets`)
-        console.log(toBuy > availableTicket)
-
-        document.querySelector("#availableTickets").textContent = seatsAvailable - toBuy;
-        document.querySelector("#soldTickets").textContent=toBuy;
+    fetchData()
         
-        //soldTicket = soldTicket
+  })
+})
 
-        ticket_available = availableTicket - soldTicket
-
-       }
-
-       
-     })
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//create a function to fetch data from the server
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function fetchData(){
+  fetch("http://localhost:3000/films")
+  .then(res => res.json())
+  .then(data => data.forEach(filmData => renderList(filmData)))
 }
-fetchMovies()
 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//create a function that renders films on the console
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function renderList(filmData){
+  const li = document.createElement("li")
+  li.id = filmData.id
+
+  li.textContent = filmData.title
+  document.getElementById("movielist").appendChild(li)
+  
+}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//create a function that renders the movies after listening to a click event
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+document.getElementById("movielist").addEventListener("click", (event) => {
+  
+  //console.log(`i have been cliked at ${event.target.id}`)
+
+  //fetching data again to render each film property.
+  fetch(`http://localhost:3000/films/${event.target.id}`)
+  .then(res => res.json())
+  .then(film => {
+    const card = `
+    <h3>${film.title}</h3>
+    <img src="${film.poster}"/>
+    <p><h4>Description</h3>${film.description}</p>
+    <p>Showtime: ${film.showtime}</p>
+    <p>Runtime: ${film.runtime}</p>    
+    `;
+
+    //append the card variable to the innerHTML of #renderMovies
+    const movieElement = document.getElementById("renderMovies");
+    movieElement.innerHTML = card;
+
+    //render the tickets section here
+    const filmTicket = `
+    <p id="capacity">${film.capacity}</p>
+    <p id="tickets_sold">${film.tickets_sold}</p>
+    <label for buyTickets>Buy Tickets</label>
+    <input id="buyTickets" type="number"></input>
+    <input id="buyTickets" type="submit" value="Buy"></input>
+    `;
+    document.getElementById("tickets").innerHTML = filmTicket
+
+    
+  })
+})
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//create a function that renders the tickets section
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
