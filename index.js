@@ -88,7 +88,7 @@ function fetchMovies(){
      })
 
      tickets()
-     document.querySelector("#button").addEventListener("click", event => {
+     document.querySelector("#button").addEventListener("submit", event => {
         event.preventDefault()
        // console.log("hello")
        const seatsAvailable = parseInt(document.querySelector("#seats").textContent);
