@@ -21,8 +21,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     //Render the ticket section here when the page DOM loads
     const filmTicket = `
+    <h3>Ticket Section</h3>
+    <label for capacity>Total Capacity:<lable>
     <p id="capacity">${firstFilm.capacity}</p>
+
+    <label for tickets_sold>Tickets Sold:<lable>
     <p id="tickets_sold">${firstFilm.tickets_sold}</p>
+
     <label for buyTickets>Buy Tickets</label>
     <input id="buyTickets" type="number"></input>
     <input id="buyTickets" type="submit" value="Buy"></input>
@@ -80,8 +85,14 @@ document.getElementById("movielist").addEventListener("click", (event) => {
 
     //render the tickets section here
     const filmTicket = `
+    <h3>Ticket Section</h3>
+
+    <label for capacity>Total Capacity:<lable>
     <p id="capacity">${film.capacity}</p>
+
+    <label for tickets_sold>Tickets Sold:<lable>
     <p id="tickets_sold">${film.tickets_sold}</p>
+    
     <label for buyTickets>Buy Tickets</label>
     <input id="buyTickets" type="number"></input>
     <input id="buyTickets" type="submit" value="Buy"></input>
