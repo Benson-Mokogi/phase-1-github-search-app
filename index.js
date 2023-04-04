@@ -30,11 +30,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     <label for buyTickets>Buy Tickets</label>
     <input id="buyTickets" type="number"></input>
-    <input id="buyTickets" type="submit" value="Buy"></input>
+    <input id="button" type="submit" value="Buy"></input>
     `;
     document.getElementById("tickets").innerHTML = filmTicket
 
     fetchData()
+    updateTickets()
         
   })
 })
@@ -95,11 +96,11 @@ document.getElementById("movielist").addEventListener("click", (event) => {
     
     <label for buyTickets>Buy Tickets</label>
     <input id="buyTickets" type="number"></input>
-    <input id="buyTickets" type="submit" value="Buy"></input>
+    <input id="button" type="submit" value="Buy"></input>
     `;
     document.getElementById("tickets").innerHTML = filmTicket
 
-    
+    updateTickets()
   })
 })
 
@@ -107,4 +108,42 @@ document.getElementById("movielist").addEventListener("click", (event) => {
 //create a function that renders the tickets section
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+function updateTickets(){
 
+  document.getElementById("button").addEventListener("click", event => {
+    event.preventDefault()
+  
+    const input = parseInt(document.getElementById("buyTickets").value);
+    console.log("hello")
+    const soldTickets = parseInt(document.getElementById("tickets_sold").textContent);
+    const cinemaCapacity = parseInt(document.getElementById("capacity").textContent); 
+    const availableTicket = cinemaCapacity - soldTickets; 
+
+
+
+    const checkInput = isNaN(input);
+
+    if(checkInput === false){
+
+      if(input > availableTicket){
+        alert(`We only have ${availableTicket} tickets remaining`)
+      } else {
+        const newSoldTickets = soldTickets + input
+        console.log(newSoldTickets)
+        document.getElementById("tickets_sold").textContent = newSoldTickets;
+        
+      }
+
+    } else {
+      alert("Enter a valid number");
+    }
+  
+    
+  
+  })
+
+}
+
+
+
+/////Needs to be looked at really well
